@@ -59,17 +59,42 @@ class detectroninference:
                         instance_mode=ColorMode.IMAGE_BW   
             )
         out = v.draw_instance_predictions(outputs["instances"].to("cpu"))
-        #print(outputs["instances"].to("cpu"))
-        #print(outputs["instances"].to("cpu").pred_keypoints)
-        #print(outputs["instances"].to("cpu").pred_masks.shape)
         masks = np.asarray(outputs["instances"].to("cpu").pred_masks)
         masks,patches=self.apply_mask(masks,orig_img)
         classes=outputs["instances"].pred_classes.to("cpu").numpy()
         boxes=(outputs["instances"].pred_boxes.to("cpu").tensor.numpy())
+        keypoints=outputs["instances"].to("cpu").pred_keypoints
         #print(c)
-        return out.get_image()[:, :, ::-1],masks,patches,boxes,classes,outputs["instances"].scores.to("cpu").numpy()
+        return out.get_image()[:, :, ::-1],masks,patches,boxes,keypoints,classes,outputs["instances"].scores.to("cpu").numpy()
+
     
-    
+def run_inference(model,img,fname,save_path="output/"):
+    """[summary]
+
+    Args:
+        model ([type]): Detectron2 Model for inference
+        img ([type]): numpy array image for inference
+        fname ([type]): name of file to be saved as results postfix
+        save_path (str, optional): Output_directory. Defaults to "output/".
+    """
+    detected_cucumber,all_masks,all_patches,boxes,keypoints,*_=model.pred(img)
+    predPoints={}
+    assert keypoints.shape[0]==len(all_patches),f"Number of detected fruits are not equal to number of keypoints detected"
+    cropedPatches=[]
+    cropedmasks=[]
+    for i,patch in enumerate(all_patches):
+        x, y, w, h = cv2.boundingRect(cv2.cvtColor(patch, cv2.COLOR_BGR2GRAY))
+        newImg = patch[y:y+h, x:x+w]
+        mask=all_masks[i][y:y+h, x:x+w]
+        offset=np.array([x,y])
+        predPoints[i]=[tuple(keypoints[i][0].round().long().numpy()[:2]-offset),tuple(keypoints[i][1].round().long().numpy()[:2]-offset)]
+        cropedPatches.append(newImg)
+        cropedmasks.append(mask)
+    # Correction
+    corrected_imgs=apply_rotation(cropedPatches,predPoints)
+    corrected_masks=apply_rotation(cropedmasks,predPoints)
+    save_results(detected_cucumber,cropedPatches,predPoints,corrected_imgs,fname,save_path)
+
 
 if __name__=="__main__":
     model_path="/media/asad/ADAS_CV/vegs_results/models/pepper/keypoints/model_final.pth"
@@ -86,8 +111,4 @@ if __name__=="__main__":
         if img is not None:
             count+=1
             print(f"Processing image {f_p} Count {count}")
-            detected_pepp,all_masks,all_patches,boxes,*_=pepp.pred(img)
-            #fig=plt.figure(figsize=(10,10))
-            #plt.imshow(detected_pepp[...,::-1])
-            cv2.imshow("Detected",detected_pepp)
-            cv2.waitKey(0)
+            run_inference(pepp,img,fname=filename)

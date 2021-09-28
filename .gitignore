@@ -1,2 +1,6 @@
 *.pth
-
+*.pyc
+*__pycache__
+*.jpg
+*output/*
+*outputs/

@@ -86,8 +86,8 @@ def get_imagePoints(imgPoints,nz_points):
         cpoint_head=None
         cpoint_tail=None
         # very high intitial distances
-        dist_tail=12345
-        dist_head=12345
+        dist_tail=123456
+        dist_head=123456
         if point is not None and point[0] is not None:
             cpoint_head=min(nz_points,key=lambda c:distance.euclidean(c,point[0]))
             dist_head=distance.euclidean(cpoint_head,point[0])
@@ -194,6 +194,152 @@ def draw_points(datalist,k=5):
         cv2.waitKey(0)
 
 
+def get_angle(p0, p1, p2):
+    """Get signed angle between two points
+
+    Args:
+        p0 ([type]): head point
+        p1 ([type]): tail point
+        p2 ([type]): reference point
+
+    Returns:
+        [type]: Angle in degrees
+    """
+    v0 = np.array(p0) - np.array(p1)
+    v1 = np.array(p2) - np.array(p1)
+    angle = np.math.atan2(np.linalg.det([v0,v1]),np.dot(v0,v1))
+    return np.degrees(angle)
+
+def rotate_image(mat, angle):
+    """Rotates Image by angle
+
+    Args:
+        mat ([type]): Image 
+        angle ([type]): Angle in Degrees
+
+    Returns:
+        [type]: Rotated padded Image
+    """
+    height, width = mat.shape[:2] # image shape has 3 dimensions
+    image_center = (width/2, height/2) # getRotationMatrix2D needs coordinates in reverse order (width, height) compared to shape
+    rotation_mat = cv2.getRotationMatrix2D(image_center, angle, 1.)
+    # rotation calculates the cos and sin, taking absolutes of those.
+    abs_cos = abs(rotation_mat[0,0]) 
+    abs_sin = abs(rotation_mat[0,1])
+
+    # find the new width and height bounds
+    bound_w = int(height * abs_sin + width * abs_cos)
+    bound_h = int(height * abs_cos + width * abs_sin)
+
+    # subtract old image center (bringing image back to origo) and adding the new image center coordinates
+    rotation_mat[0, 2] += bound_w/2 - image_center[0]
+    rotation_mat[1, 2] += bound_h/2 - image_center[1]
+
+    # rotate image with the new bounds and translated rotation matrix
+    rotated_mat = cv2.warpAffine(mat, rotation_mat, (bound_w, bound_h))
+    return rotated_mat
+
+
+def check_points(cropedPatches,points):
+    """Visualize detected Keypoints from DNN
+
+    Args:
+        cropedPatches ([type]): Cropped Patches
+        points ([type]): predicted Points to be drawn
+
+    Returns:
+        [type]: Matplotlib figure of detcted keypoints drawn on Image
+    """
+    fig = plt.figure(figsize=(10, 10))
+    plt.title("Points ResNet34",loc='center')
+    #plt.rcParams['figure.figsize'] = [45, 45]
+    nrows=int(np.ceil(len(points.keys())/2))
+    ncols=2
+    
+    for i,img in enumerate(cropedPatches):
+        img=img.copy()
+        pointsize=img.shape[0]//20
+        assert img is not None, "Image not found!!"
+        if points[i][0] is not None:
+            cv2.circle(img,points[i][0],pointsize,(255,255,0),-1)
+        if points[i][1] is not None:
+            cv2.circle(img,points[i][1],pointsize,(255,0,255),-1)
+        if points[i][0] is not None and points[i][1] is not None:
+            #cv2.line(img,tuple(points[i][0]),tuple(points[i][1]),(255,255,255),2)
+            ref=(img.shape[1],points[i][1][1])
+            #cv2.line(img,tuple(points[i][1]),ref,(255,255,255),2)
+        ax = fig.add_subplot(nrows,ncols,i+1)
+        ax.imshow(img[...,::-1])
+        #plt.tight_layout()
+    return fig
+
+def apply_rotation(cropedPatches,predPoints,th=5):
+    """Correct Orientation of fruit by rotation based on two points
+
+    Args:
+        cropedPatches ([type]): Image patches to apply rotation correction
+        predPoints ([type]): Pred keypoints used to calculate angles
+        th (int, optional): Rotation correction does not work if the detected point is no the boundry fix threshold for those points. Defaults to 5.
+
+    Returns:
+        [type]: Rotation corrected Image Patches
+    """
+    corrected_imgs=[]
+    for i,crop in enumerate(cropedPatches):
+        img=crop.copy()
+        h,w=img.shape[0:2]
+        head,tail=None,None
+        if predPoints[i][0] is not None and predPoints[i][0][0]>0 and predPoints[i][0][1]>0:
+            head=list(predPoints[i][0])
+        if predPoints[i][1] is not None and predPoints[i][1][0]>0 and predPoints[i][1][1]>0:
+            tail=list(predPoints[i][1])
+        #print(head,tail)
+        if head is not None and tail is not None:
+            if abs(head[0]-w)<th:
+                head[0]-=th
+            if abs(tail[0]-w)<th:
+                tail[0]-=th
+            ref=(img.shape[1],tail[1]) 
+            angle=get_angle(head,tail,ref)
+            rotated=rotate_image(img,-angle)
+            corrected_imgs.append(rotated)
+    return corrected_imgs
+
+def save_results(detected_cucumber,cropedPatches,predPoints,corrected_imgs,fname,save_path):
+    """Save figures of results to visualize
+
+    Args:
+        detected_cucumber ([type]): Detection result from detectron2
+        cropedPatches ([type]): Croped patch of original Image
+        predPoints ([type]): predicted keypoints adjusted according to cropped patches
+        corrected_imgs ([type]): orientation corrected Image
+        fname ([type]): Filename for saving postfix
+        save_path ([type]): "Path to save"
+    """
+    fig=plt.figure(figsize=(10,10))
+    plt.title("Detected Pepper MASKRCNN",loc='center')
+    plt.imshow(detected_cucumber[...,::-1])
+    fig.savefig(os.path.join(save_path,f"segmented_{fname}"))
+    #show croped images
+    fig = plt.figure(figsize=(10, 10))
+    plt.title("Cropped",loc='center')
+    nrows=np.ceil(len(cropedPatches)/2)
+    ncols=2
+    for i,patch in enumerate(cropedPatches):
+        ax = fig.add_subplot(nrows,ncols,i+1)
+        ax.imshow(patch[...,::-1])
+    fig.savefig(os.path.join(save_path,f"Cropped_{fname}"))
+    fig=check_points(cropedPatches,predPoints)
+    fig.savefig(os.path.join(save_path,f"Points_{fname}"))
+    fig = plt.figure(figsize=(10, 10))
+    #plt.title("Corrected Orientation",loc='center')
+    #plt.rcParams['figure.figsize'] = [45, 45]
+    nrows=np.ceil(len(corrected_imgs)/2)
+    ncols=2
+    for i,correct_img in enumerate(corrected_imgs):
+        ax = fig.add_subplot(nrows,ncols,i+1)
+        ax.imshow(correct_img[...,::-1])
+    fig.savefig(os.path.join(save_path,f"corrected_{fname}"))
 
 if __name__=="__main__":
     #Check the data loader

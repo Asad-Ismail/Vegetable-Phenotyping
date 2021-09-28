@@ -1,3 +1,4 @@
+from numpy.lib.npyio import save
 import detectron2
 from detectron2.utils.logger import setup_logger
 setup_logger()
@@ -316,6 +317,7 @@ def save_results(detected_cucumber,cropedPatches,predPoints,corrected_imgs,fname
         fname ([type]): Filename for saving postfix
         save_path ([type]): "Path to save"
     """
+    os.makedirs(save_path, exist_ok=True)
     fig=plt.figure(figsize=(10,10))
     plt.title("Detected Pepper MASKRCNN",loc='center')
     plt.imshow(detected_cucumber[...,::-1])
@@ -340,6 +342,15 @@ def save_results(detected_cucumber,cropedPatches,predPoints,corrected_imgs,fname
         ax = fig.add_subplot(nrows,ncols,i+1)
         ax.imshow(correct_img[...,::-1])
     fig.savefig(os.path.join(save_path,f"corrected_{fname}"))
+    ## Concatenate Results
+    merge_scans=os.path.join(save_path+"merge_results")
+    os.makedirs(merge_scans, exist_ok=True)
+    img_det=cv2.imread(os.path.join(save_path,f"segmented_{fname}"))
+    img_crop=cv2.imread(os.path.join(save_path,f"Cropped_{fname}"))
+    img_points=cv2.imread(os.path.join(save_path,f"Points_{fname}"))
+    img_corrected=cv2.imread(os.path.join(save_path,f"corrected_{fname}"))
+    joined_img=np.concatenate([img_det,img_crop,img_points,img_corrected],axis=1)
+    cv2.imwrite(os.path.join(merge_scans,f"{fname}"),joined_img)
 
 if __name__=="__main__":
     #Check the data loader

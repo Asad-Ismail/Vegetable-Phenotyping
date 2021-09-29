@@ -11,6 +11,7 @@ from fastapi.responses import StreamingResponse
 
 
 
+
 print(f"Intializing Model!!")
 model_path="/media/asad/ADAS_CV/vegs_results/models/pepper/keypoints/model_final.pth"
 pepp=detectroninference(model_path)

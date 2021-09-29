@@ -6,11 +6,8 @@ class detectroninference:
     """Inference if detectron2 detection and segmentation. The config of inference should be the same as training. 
     ## TODO get config from the training
     """
-    def __init__(self,model_path,num_cls=1,name_classes=["pepp"]):
+    def __init__(self,model_path,name_classes=["pepp"]):
         cfg = get_cfg()
-        cfg.merge_from_file(model_zoo.get_config_file("COCO-InstanceSegmentation/mask_rcnn_R_101_DC5_3x.yaml"))
-        cfg.DATASETS.TRAIN = ("pep_train",)
-        cfg.DATASETS.TEST = ()
         cfg.MODEL.WEIGHTS=model_path
         cfg["MODEL"]["ANCHOR_GENERATOR"]["ASPECT_RATIOS"][0]=[0.5,1.0,1.5]
         cfg["INPUT"]["RANDOM_FLIP"]="horizontal"
@@ -20,15 +17,7 @@ class detectroninference:
         cfg["INPUT"]["Contrast_SCALE"]=[0.5,2]
         cfg["INPUT"]["Saturation_SCALE"]=[0.5,2]
         cfg["MODEL"]["KEYPOINT_ON"]=True
-        cfg.MODEL['ROI_KEYPOINT_HEAD']["NUM_KEYPOINTS"]=2
-        cfg.SOLVER.IMS_PER_BATCH = 1
-        cfg.SOLVER.BASE_LR = 1e-5  # pick a good LR
-        cfg.SOLVER.CHECKPOINT_PERIOD = 500
-        cfg.SOLVER.MAX_ITER = 5000    # 300 iterations seems good enough for this toy dataset; you will need to train longer for a practical dataset
-        cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = 512   # faster, and good enough for this toy dataset (default: 512)
-        cfg.MODEL.ROI_HEADS.NUM_CLASSES = 1 
-        cfg.MODEL.SEM_SEG_HEAD.NUM_CLASSES=1
-        cfg.MODEL.RETINANET.NUM_CLASSES=1
+        cfg.merge_from_file("train_config.yml")
         cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.9
         print(f"Test Image sizes {cfg.INPUT.MIN_SIZE_TEST},{cfg.INPUT.MAX_SIZE_TEST}")
         self.predictor = DefaultPredictor(cfg)
@@ -39,6 +28,9 @@ class detectroninference:
         
     
     def apply_mask(self,mask,img):
+        """
+        Get masks and patches based on mask detection
+        """
         all_masks=np.zeros(mask.shape,dtype=np.uint8)
         all_patches=np.zeros((*mask.shape,3),dtype=np.uint8)
         """Apply the given mask to the image."""
@@ -69,7 +61,7 @@ class detectroninference:
 
     
 def run_inference(model,img,fname,save_path="output/"):
-    """[summary]
+    """Run the model inference
 
     Args:
         model ([type]): Detectron2 Model for inference

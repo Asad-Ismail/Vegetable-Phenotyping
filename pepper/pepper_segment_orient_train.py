@@ -65,6 +65,11 @@ class VegTrainer(DefaultTrainer):
         return hooks
 
 def get_config():
+    """Get configuration/hyperparameters of detectron2
+
+    Returns:
+        [type]: config
+    """
     cfg = get_cfg()
     # Dataset dicts
     cfg.merge_from_file(model_zoo.get_config_file("COCO-InstanceSegmentation/mask_rcnn_R_101_DC5_3x.yaml"))
@@ -115,7 +120,11 @@ if __name__=="__main__":
         MetadataCatalog.get("pep_" + d).set(keypoint_flip_map=[("head","head"),("tail","tail")])
         MetadataCatalog.get("pep_" + d).set(keypoint_connection_rules=[("head","tail",(0,255,255))])
     cfg=get_config()
+    # save config to be used for inderence
+    yml_file=cfg.dump()
+    with open('train_config.yml', 'w') as outfile:
+        outfile.write(yml_file)
     trainer = VegTrainer(cfg)
     trainer.resume_or_load(resume=False )
-    #trainer.train()
+    trainer.train()
      

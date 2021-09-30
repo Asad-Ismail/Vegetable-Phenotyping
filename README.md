@@ -1,5 +1,5 @@
 # Vegetable-Phenotyping
-Vegetable phenotyping using detectron2 and deplyment using restapi
+Vegetable phenotyping using detectron2 and deplyment using rest api
 
 ### Features
 

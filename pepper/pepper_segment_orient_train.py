@@ -1,5 +1,6 @@
 # Author Asad Ismail
 from utils import *
+from phenotypes_utils import *
 
 
 class LossEvalHook(HookBase):
@@ -106,6 +107,10 @@ def get_config():
     cfg.OUTPUT_DIR="output" 
     os.makedirs(cfg.OUTPUT_DIR, exist_ok=True)
     print(f" The output directory is {cfg.OUTPUT_DIR}")
+    # save config to be used for inderence
+    yml_file=cfg.dump()
+    with open('train_config.yml', 'w') as outfile:
+        outfile.write(yml_file)
     return cfg
 
 
@@ -120,10 +125,6 @@ if __name__=="__main__":
         MetadataCatalog.get("pep_" + d).set(keypoint_flip_map=[("head","head"),("tail","tail")])
         MetadataCatalog.get("pep_" + d).set(keypoint_connection_rules=[("head","tail",(0,255,255))])
     cfg=get_config()
-    # save config to be used for inderence
-    yml_file=cfg.dump()
-    with open('train_config.yml', 'w') as outfile:
-        outfile.write(yml_file)
     trainer = VegTrainer(cfg)
     trainer.resume_or_load(resume=False )
     trainer.train()

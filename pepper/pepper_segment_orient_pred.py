@@ -122,7 +122,7 @@ if __name__ == "__main__":
     model_path = (
         "/media/asad/ADAS_CV/vegs_results/models/pepper/keypoints/model_final.pth"
     )
-    img_path = "/media/asad/ADAS_CV/datasets_Vegs/pepper/one_annotated/train"
+    img_path = "/media/asad/ADAS_CV/datasets_Vegs/pepper/one_annotated/one"
     save_path = "output/"
     print(f"Intializing Model!!")
     pepp = detectroninference(model_path)
@@ -167,5 +167,3 @@ if __name__ == "__main__":
                 filename,
                 save_path,
             )
-            if file_index == 10:
-                break

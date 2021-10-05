@@ -294,8 +294,6 @@ def apply_rotation(cropedPatches, predPoints, th=5):
     corrected_imgs = []
     for i, crop in enumerate(cropedPatches):
         img = crop.copy()
-        print(f"Before Rotation")
-        print(img.shape)
         h, w = img.shape[0:2]
         head, tail = None, None
         if (
@@ -319,8 +317,6 @@ def apply_rotation(cropedPatches, predPoints, th=5):
             ref = (img.shape[1], tail[1])
             angle = get_angle(head, tail, ref)
             rotated = rotate_image(img, -angle)
-            print(f"Rotated Shape")
-            print(rotated.shape)
             corrected_imgs.append(rotated)
     return corrected_imgs
 

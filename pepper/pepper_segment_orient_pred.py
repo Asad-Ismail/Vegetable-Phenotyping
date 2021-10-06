@@ -9,16 +9,17 @@ class detectroninference:
 
     def __init__(self, model_path, name_classes=["pepp"]):
         cfg = get_cfg()
-        cfg.MODEL.WEIGHTS = model_path
         cfg["MODEL"]["ANCHOR_GENERATOR"]["ASPECT_RATIOS"][0] = [0.5, 1.0, 1.5]
         cfg["INPUT"]["RANDOM_FLIP"] = "horizontal"
         cfg["INPUT"]["ROTATE"] = [-2.0, 2.0]
         cfg["INPUT"]["LIGHT_SCALE"] = 2
-        cfg["INPUT"]["Brightness_SCALE"] = [0.5, 1.5]
+        cfg["INPUT"]["Brightness_SCALE"] = [0, 0]
         cfg["INPUT"]["Contrast_SCALE"] = [0.5, 2]
         cfg["INPUT"]["Saturation_SCALE"] = [0.5, 2]
         cfg["MODEL"]["KEYPOINT_ON"] = True
         cfg.merge_from_file("train_config.yml")
+        # Important to load weights after merging from file
+        cfg.MODEL.WEIGHTS = model_path
         cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.9
         print(f"Test Image sizes {cfg.INPUT.MIN_SIZE_TEST},{cfg.INPUT.MAX_SIZE_TEST}")
         self.predictor = DefaultPredictor(cfg)
@@ -48,7 +49,6 @@ class detectroninference:
 
     def pred(self, img):
         orig_img = img.copy()
-        height, width = img.shape[:2]
         outputs = self.predictor(img)
         v = Visualizer(
             img[:, :, ::-1],
@@ -62,7 +62,6 @@ class detectroninference:
         classes = outputs["instances"].pred_classes.to("cpu").numpy()
         boxes = outputs["instances"].pred_boxes.to("cpu").tensor.numpy()
         keypoints = outputs["instances"].to("cpu").pred_keypoints
-        # print(c)
         return (
             out.get_image()[:, :, ::-1],
             masks,
@@ -119,9 +118,7 @@ def run_inference(model, img):
 
 
 if __name__ == "__main__":
-    model_path = (
-        "/media/asad/ADAS_CV/vegs_results/models/pepper/keypoints/model_final.pth"
-    )
+    model_path = "/home/asad/projs/veg_phenotyping/pepper/output/model_final.pth"
     img_path = "/media/asad/ADAS_CV/datasets_Vegs/pepper/one_annotated/one"
     save_path = "output/"
     print(f"Intializing Model!!")

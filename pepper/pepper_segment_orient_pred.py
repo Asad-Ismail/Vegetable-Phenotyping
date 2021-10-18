@@ -118,7 +118,7 @@ def run_inference(model, img):
 
 
 if __name__ == "__main__":
-    model_path = "/home/asad/projs/veg_phenotyping/pepper/output/model_final.pth"
+    model_path = "output/model_final.pth"
     img_path = "/media/asad/ADAS_CV/datasets_Vegs/pepper/one_annotated/one"
     save_path = "output/"
     print(f"Intializing Model!!")

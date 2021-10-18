@@ -1,6 +1,8 @@
 # Author Asad Ismail
+from torch.quantization.fuse_modules import fuse_modules
 from utils import *
 from phenotypes_utils import *
+import torch.nn as nn
 
 
 class LossEvalHook(HookBase):
@@ -47,7 +49,7 @@ class LossEvalHook(HookBase):
             self._do_loss_eval()
 
 
-class VegTrainer(DefaultTrainer):
+class VegFusedQuantizedTrainer(DefaultTrainer):
     """Create a trainer for veg datasets
 
     Args:
@@ -56,6 +58,53 @@ class VegTrainer(DefaultTrainer):
     Returns:
         [type]: [description]
     """
+
+    def __init__(self, cfg, fuse=True):
+        super().__init__(cfg)
+        # self.fuse_modules()
+        for module in self.model.modules():
+            print(module)
+
+        # self.model = torch.quantization.fuse_modules(
+        #    self.model,
+        #    [
+        #        [
+        #            "roi_heads.keypoint_head.conv_fcn8",
+        #            "roi_heads.keypoint_head.conv_fcn_relu8",
+        #        ]
+        #    ],
+        #    inplace=True,
+        # )
+        print(self.model)
+
+    def get_children(self, m: torch.nn.Module):
+        # get children form model!
+        children = dict(m.named_children())
+        output = {}
+        if children == {}:
+            # if module has no children; m is last child! :O
+            return m
+        else:
+            # look for children from children... to the last child!
+            for name, child in children.items():
+                try:
+                    output[name] = self.get_children(child)
+                except TypeError:
+                    output[name] = self.get_children(child)
+        return output
+
+    def fuse_modules(self):
+
+        # out = self.get_children(self.model)
+        # print(out)
+        weights = {}
+        for name, param in self.model.named_parameters():
+            if name.endswith(".bias"):
+                continue
+            if "conv_fcn8" in name:
+                foundname = True
+            key_name = f"Layer {name.split('.')[1]}"
+            weights[key_name] = param.detach().view(-1).cpu().numpy()
 
     @classmethod
     def build_evaluator(cls, cfg, dataset_name, output_folder=None):
@@ -152,6 +201,6 @@ if __name__ == "__main__":
             keypoint_connection_rules=[("head", "tail", (0, 255, 255))]
         )
     cfg = get_config()
-    trainer = VegTrainer(cfg)
+    trainer = VegFusedQuantizedTrainer(cfg)
     trainer.resume_or_load(resume=False)
     trainer.train()

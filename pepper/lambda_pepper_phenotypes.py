@@ -463,7 +463,9 @@ if __name__==__name__:
         results["square_aspect_ratio"].append(square_aspect_ratio)
     
     results_df=pd.DataFrame.from_dict(results,orient='index').transpose()
-    results_df.to_excel('result.xlsx')
+    result_json = results_df.to_json(orient="index")
+    print(result_json)
+    #results_df.to_excel('result.xlsx')
     #print(results)
     #for i in range(len(labels)):
     #    cv2.imshow(labels[i],vis_imgs[i])

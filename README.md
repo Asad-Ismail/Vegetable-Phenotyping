@@ -8,11 +8,11 @@ Vegetable phenotyping using detectron2 and deplyment using rest api
 
 ### Structure
 
----> Detectron2 contains modified detectron2 
+#### Detectron2 contains modified detectron2 
 
----> notebooks contain experimental notebooks
+#### notebooks contain experimental notebooks
 
----> pepper contains training, inference and deployment scripts for pepper phenotyping
+#### pepper contains training, inference and deployment scripts for pepper phenotyping
 
 ### Results for pepper Detection and Orientation correction 
 

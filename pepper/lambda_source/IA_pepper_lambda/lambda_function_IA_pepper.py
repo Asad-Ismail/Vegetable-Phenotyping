@@ -221,7 +221,7 @@ def lambda_handler(event, context):
                 img_mask =alpha_channel[np.where(mask == 255)]
                 height = np.max(img_mask) / 10 - np.min(alpha_channel) / 10
 
-            cropped = crop_mask(image, mask).astype('uint8')
+            #cropped = crop_mask(image, mask).astype('uint8')
             # Assuming the mask and image are original size images crop the relevant fruit part
             x, y, w, h = cv2.boundingRect(mask)
             croped_Img = image[y:y+h, x:x+w]

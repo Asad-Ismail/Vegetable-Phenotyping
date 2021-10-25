@@ -222,6 +222,10 @@ def lambda_handler(event, context):
                 height = np.max(img_mask) / 10 - np.min(alpha_channel) / 10
 
             cropped = crop_mask(image, mask).astype('uint8')
+            # Assuming the mask and image are original size images crop the relevant fruit part
+            x, y, w, h = cv2.boundingRect(mask)
+            croped_Img = image[y:y+h, x:x+w]
+            croped_mask=mask[y:y+h, x:x+w]
             
             # Added for Pepper phenotyping defined in utils. Works on mask and image patch Assuming length is across x and width is across y will produce wring results
             # if  the conditions are not met, Some outputs are not used since they are alöready included can be used for debugging
@@ -244,7 +248,7 @@ def lambda_handler(event, context):
             square_aspect_ratio,
             vis_imgs,
             labels
-            ) = phenotype_measurement_pepper(mask, image,ppx=refrence['length'],ppy=refrence['width'])
+            ) = phenotype_measurement_pepper(croped_mask, croped_Img,ppx=refrence['length'],ppy=refrence['width'])
             
           
             try:

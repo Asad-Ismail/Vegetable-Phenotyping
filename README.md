@@ -1,23 +1,19 @@
 # Vegetable-Phenotyping
 Vegetable phenotyping using detectron2 and deplyment using rest api
 
-### Features
 
-1) Phenotyping of Peppers using 2D Images including detection orientation correction and dimension measurements. Deployment of trained model using RESTAPI
-2) Cucumber Detection and Phenotyping
+### Stucture
 
-### Structure
+    .
+    ├── detectron2              # Slightly modified detectron 2 
+    ├── notebook                # Experimental notebooks/ Standalone notebooks later converted to be part of pipelines               
+    ├── Sagemaker               # Train and deploy models in Sagemaker
+    ├── Utils                   # General utils scripts
+    ├── Pepper                  # Pepper phenotyping
+    │   ├── orientation_correction          # Detection and orientation correction based on seperte neural networks
+    │   ├── scripts                         # Train and deploy end to end pepper model for detection/segemetation, oreintation correction and pheoype detection
+    │   └── *                               
+    └── ...
 
-#### Detectron2 contains modified detectron2 
 
-#### notebooks contain experimental notebooks
-
-#### pepper contains training, inference and deployment scripts for pepper phenotyping
-
-### Results for pepper Detection and Orientation correction 
-
-  <p align="center">
-    <img src="pepper/images/0008.jpg" alt="pruning"/>
-  </p>
-    <p align="center">
   

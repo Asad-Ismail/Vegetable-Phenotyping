@@ -5,3 +5,5 @@
 *outputs/
 *.zip
 *.vscode
+*.pkl
+

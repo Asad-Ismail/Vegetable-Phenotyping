@@ -4,6 +4,6 @@
 *output/*
 *outputs/
 *.zip
-*.vscode
+*.vscode/
 *.pkl
 

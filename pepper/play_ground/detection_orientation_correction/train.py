@@ -23,14 +23,6 @@ class train_pointnet:
             ColReader("Images"),
             ColReader("labels"),
         ]
-        # self.dblock = DataBlock(
-        #    blocks=(ImageBlock, PointBlock),
-        #    get_items=get_image_files,
-        #    splitter=RandomSplitter(valid_pct=0.01),
-        #    get_y=self.get_y,
-        #    item_tfms=self.item_tfms,
-        #    batch_tfms=self.batch_tfms,
-        # )
         dblock = DataBlock(
             blocks=(ImageBlock, PointBlock),
             splitter=RandomSplitter(valid_pct=0.01),

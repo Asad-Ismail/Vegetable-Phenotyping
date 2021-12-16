@@ -1,0 +1,19 @@
+
+# type1 patches inputs and labels are top and bottom of fruit labelled on patches such as one detected from MaskRCNN
+type1_srcdir: ["/media/asad/ADAS_CV/datasets_Vegs/pepper/sc_v1_v2_patches","/media/asad/ADAS_CV/datasets_Vegs/pepper/sc_v1_v2_patches"]
+type1_labels: ["/media/asad/ADAS_CV/datasets_Vegs/pepper/pepper_points/labels_my-project-name_2021-08-02-11-51-34.csv","/media/asad/ADAS_CV/datasets_Vegs/pepper/pepper_points/labels_my-project-name_2021-08-02-08-37-48.csv"]
+
+# type2 are images containing possible numtiple fruits and labels are top and bottom of fruit labelled on patches such as one detected from MaskRCNN
+type2_srcdir: ["/media/asad/ADAS_CV/scalecam_pepper_selected","/media/asad/8800F79D00F79104/aws_bayer_Data/VIP_pepper_filter/Scalecam_validate"]
+type2_labels: ["/media/asad/ADAS_CV/datasets_Vegs/pepper/pepper_points/labels_my-project-name_2021-08-05-12-17-20.csv","/media/asad/ADAS_CV/datasets_Vegs/pepper/pepper_points/scalecam_30_10_2021.csv"]
+maskrcnn_weight: "/media/asad/ADAS_CV/pepp/06-8-02/model_final.pth"
+
+
+
+# Other config related to preparing datasets
+build_dataset: True
+visualize_dataset: False
+post_process: True
+copy_patches: True
+point_annotation: "point_annotation.pkl"
+patch_output: "patches_data"

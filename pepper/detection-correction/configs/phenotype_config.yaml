@@ -1,0 +1,14 @@
+
+maskrcnn_weights: "/media/asad/8800F79D00F79104/aws_bayer_Data/VIP_pepper_filter/lib/model_weights/31-10-21-weights/model_final.pth"
+pointnet_weights: "/media/asad/8800F79D00F79104/aws_bayer_Data/VIP_pepper_filter/lib/model_weights/31-10-21-weights/points.pkl"
+img_path: "/media/asad/8800F79D00F79104/aws_bayer_Data/VIP_pepper_filter/Scalecam_validate"
+# Ppx and ppy set disx and disy None if distances are to measured in pixels instead of distances
+disx: 31.115
+pixx: 956
+disy: 23.177
+pixy: 712
+# Visualize and save results
+visualize: True
+save_path: "results"
+
+

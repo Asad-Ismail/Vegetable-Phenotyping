@@ -1,0 +1,23 @@
+
+train: True
+##################################################################################### Training configs ##############################################################
+# Train Networks
+train_maskrcnn : False
+train_resnet34: True
+
+# Detection data for MaskRCNN directory contains both images and annotated json files. The directory should have train and valid subdirectories
+detection_data: "/media/asad/ADAS_CV/datasets_Vegs/pepper/annotated/scalecam1_2"
+
+points_images: "patches_data"
+points_annotation: "point_annotation.pkl"
+
+## output files of maskrcnn model and pointnet
+output_dir: "models_weights"
+
+################################################################################## Infrence configs ###################################################################
+
+maskrcnn: "/media/asad/ADAS_CV/pepp/06-8-02/model_final.pth"
+model: "pn_res34"
+img_path: "/media/asad/ADAS_CV/datasets_Vegs/pepper/sc_v1_v2_complete_images"
+save_path: "/media/asad/ADAS_CV/vegs_results/pepper/sc_v1_v2_orig/indiviual_scans"
+merge_path: "/media/asad/ADAS_CV/vegs_results/pepper/sc_v1_v2_orig/merge_scans"

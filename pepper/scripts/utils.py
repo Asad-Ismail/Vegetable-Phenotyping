@@ -391,3 +391,151 @@ if __name__ == "__main__":
     vis = True
     if vis:
         draw_points(dataset_dicts)
+        
+
+def remove_bad(points, img_dir):
+    """Remove files with points outside the bounds of fruit 
+
+    Args:
+        points ([Dict]): Dictionary with points
+        img_dir ([str]): Patch directory
+    """
+    imgs = get_image_files(Path(img_dir))
+    removed = 0
+    for imgfile in imgs:
+        if imgfile.name in points:
+            continue
+        else:
+            removed += 1
+            imgfile.unlink()
+    print(f"Removed {removed} Images")
+    
+   
+def get_image_files(img_path):
+    all_imgs = []
+    fnames = []
+    for file_index, filename in enumerate(os.listdir(img_path)):
+        if filename.endswith(".json") or filename.endswith(".jpg.png") or filename.endswith(".tar") or \
+        filename.endswith(".json") or filename.endswith(".ipynb_checkpoints"):
+            continue
+        f_p = os.path.join(img_path, filename)
+        fnames.append(filename)
+        all_imgs.append(f_p)
+    return all_imgs, fnames
+
+
+def combine_images(fnames, save_path, merge_path):
+    for index in range(len(fnames)):
+        img_det = cv2.imread(os.path.join(save_path, f"segmented_{fnames[index]}"))
+        img_crop = cv2.imread(os.path.join(save_path, f"Cropped_{fnames[index]}"))
+        fig = plt.figure(figsize=(40, 5))
+        plt.title("Combined", loc="center")
+        nrows = 1
+        ncols = 4
+        ax = fig.add_subplot(nrows, ncols, 1)
+        ax.imshow(img_det[..., ::-1])
+        if img_crop is not None:
+            # Resize every image to croped concatenated Image
+            h, w, _ = img_crop.shape
+            dims = (w, h)
+            # img_det = image_resize(img_det, height=h)
+            ax = fig.add_subplot(nrows, ncols, 2)
+            ax.imshow(img_crop[..., ::-1])
+            img_points = cv2.imread(os.path.join(save_path, f"Points_{fnames[index]}"))
+            ax = fig.add_subplot(nrows, ncols, 3)
+            ax.imshow(img_points[..., ::-1])
+            # img_points = cv2.resize(img_points, dims)
+            img_corrected = cv2.imread(
+                os.path.join(save_path, f"corrected_{fnames[index]}")
+            )
+            # img_corrected = cv2.resize(img_corrected, dims)
+            ax = fig.add_subplot(nrows, ncols, 4)
+            ax.imshow(img_corrected[..., ::-1])
+        fig.savefig(os.path.join(merge_path, f"{fnames[index]}"))
+        # joined_img = np.concatenate(
+        #    [img_det, img_crop, img_points, img_corrected], axis=1
+        # )
+        # cv2.imwrite(os.path.join(merge_path, f"{fnames[index]}"), joined_img)
+
+
+def image_resize(image, width=None, height=None, inter=cv2.INTER_AREA):
+    # initialize the dimensions of the image to be resized and
+    # grab the image size
+    dim = None
+    (h, w) = image.shape[:2]
+
+    # if both the width and height are None, then return the
+    # original image
+    if width is None and height is None:
+        return image
+
+    # check to see if the width is None
+    if width is None:
+        # calculate the ratio of the height and construct the
+        # dimensions
+        r = height / float(h)
+        dim = (int(w * r), height)
+
+    # otherwise, the height is None
+    else:
+        # calculate the ratio of the width and construct the
+        # dimensions
+        r = width / float(w)
+        dim = (width, int(h * r))
+
+    # resize the image
+    resized = cv2.resize(image, dim, interpolation=inter)
+
+    # return the resized image
+    return resized
+
+
+def visualize_points(points, img_dir, imgname):
+    img = cv2.imread(os.path.join(img_dir, imgname))
+    # print(imgPoints)
+    imgPoints = points[imgname]
+    for i, point in enumerate(imgPoints):
+        if i == 0:
+            if point is not None:
+                cv2.circle(img, point, 14, (255, 255, 0), -1)
+        if i == 1:
+            if point is not None:
+                cv2.circle(img, point, 14, (255, 0, 255), -1)
+    # fig=plt.figure(figsize=(10,10))
+    # plt.imshow(img[...,::-1])
+    cv2.imshow("Image", img)
+    cv2.waitKey(0)
+
+
+def scale_predictions(pred, imgShape, pred_size=224):
+    scale_x = imgShape[1] / pred_size
+    scale_y = imgShape[0] / pred_size
+    pred = pred[0]
+    pred[:, 0] = pred[:, 0] * scale_x
+    pred[:, 1] = pred[:, 1] * scale_y
+    return pred
+
+
+def Copyfiles(points, src_dirs, dst_dir):
+    """Copy files in the points from all the source dirs to one dst dir
+
+    Args:
+        points ([Dict]): All the points
+        src_dirs ([lists of str]): list of all the source dirs
+        dst_dir (str): destionation of files to be copied
+    """
+    skipped = 0
+    filenames = points.keys()
+    for filename in filenames:
+        path = None
+        for src_dir in src_dirs:
+            path = os.path.join(src_dir, filename)
+            if os.path.exists(path):
+                break
+        if not os.path.exists(path):
+            skipped += 1
+            continue
+        # assert path is not None, "The file {} does not exists in any source directory"
+        destination = os.path.join(dst_dir, filename)
+        shutil.copy(path, destination)
+    print(f"Coppied {len(filenames)-skipped}/{len(filenames)}")

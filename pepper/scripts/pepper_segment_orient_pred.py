@@ -17,7 +17,7 @@ class detectroninference:
         cfg["INPUT"]["Contrast_SCALE"] = [0.5, 2]
         cfg["INPUT"]["Saturation_SCALE"] = [0.5, 2]
         cfg["MODEL"]["KEYPOINT_ON"] = True
-        cfg.merge_from_file("train_config.yml")
+        cfg.merge_from_file("config/train_config.yml")
         # Important to load weights after merging from file
         cfg.MODEL.WEIGHTS = model_path
         cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.9

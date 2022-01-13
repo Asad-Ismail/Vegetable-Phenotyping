@@ -6,4 +6,4 @@
 *.zip
 *.vscode/
 *.pkl
-
+*results/*

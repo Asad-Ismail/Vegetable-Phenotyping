@@ -1,0 +1,1315 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>veg_phenome_base API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>veg_phenome_base</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python"># Author Asad Ismail
+# Provides Base class for veg phenotpying
+
+import numpy as np
+import cv2
+from colormath.color_objects import LabColor, sRGBColor
+from colormath.color_conversions import convert_color
+
+
+class VEGPHENOMEBASE:
+    &#34;&#34;&#34;
+    Base Phenotyping class. Provides basic phenotype measurements. Each Veg can ingherit and modify the methods of this class
+    &#34;&#34;&#34;
+
+    def __init__(self, ppx=None, ppy=None) -&gt; None:
+        self.ppx = ppx
+        self.ppy = ppy
+
+    def __repr__(self) -&gt; str:
+        return (
+            &#34;Base class of Veg phenotyping. Overload methods for each fruit/veg as necessary. Currently Implements following crop agnostic traits&#34;
+            + f&#34;{dir(self)}&#34;
+        )
+
+    def min_max_segment(self, ref, xs, ys):
+        &#34;&#34;&#34;Calculate min, max of a patch. Take a reference point x and calculate min and max y for it
+
+        Args:
+            ref int: Reference x for which we need to find min and max y
+            xs (Union[list, np.array()]): All sorted xs
+            ys (Union[list, np.array()]): All sorted ys
+
+        Returns:
+            [Tuple(List,int)]: [segment_point_min,segment_point_max,Segment_width]
+        &#34;&#34;&#34;
+        m_p = np.argwhere(xs == ref)
+        y_p = ys[m_p]
+        ymax = np.max(y_p)
+        ymin = np.min(y_p)
+        out = [(ref, ymin), (ref, ymax), ymax - ymin]
+        return out
+
+    def find_max_height(self, xs, ys):
+        &#34;&#34;&#34;Find Max height of fruit. Height is defined across x dimension.
+        Args:
+            xs (Union[list, np.array()]): All sorted xs
+            ys (Union[list, np.array()]): All sorted ys
+
+        Returns:
+             [Tuple(List,int)]: [height_points, max_height]
+        &#34;&#34;&#34;
+        # Loop throgh all ys and find min and max x
+        assert len(xs) == len(ys), &#34;Lengths of xs and ys are not equal&#34;
+        unique_y = sorted(set(ys))
+        height_points = []
+        maxheight = -1
+        height_points = None
+        for y in unique_y:
+            selected_index = np.argwhere(ys == y)
+            selected_xs = xs[selected_index]
+            xmin = np.min(selected_xs)
+            xmax = np.max(selected_xs)
+            height = xmax - xmin
+            if height &gt; maxheight:
+                height_points = [(xmin, y), (xmax, y)]
+                maxheight = height
+        assert maxheight &gt;= 0, &#34;Max Height could not found&#34;
+        return height_points, maxheight
+
+    def find_mid_height_width(self, tops, bottoms):
+        &#34;&#34;&#34;Finds Width of patch at mid height
+
+        Args:
+            tops (List[Points]): Top boundary of fruit
+            bottoms (List[Points]): Lower boundary of fruit
+
+        Returns:
+            [Tuple(List[Points],int)]: [Mid width Points, mid_width]
+        &#34;&#34;&#34;
+        mid_height = len(tops) // 2
+        width_points = [tops[mid_height], bottoms[mid_height]]
+        width = bottoms[mid_height][1] - tops[mid_height][1]
+        return width_points, width
+
+    def find_mid_width_height(self, xs, ys):
+        &#34;&#34;&#34;Find height of patch at mid width
+
+        Args:
+            xs (Union[list, np.array()]): All sorted xs
+            ys (Union[list, np.array()]): All sorted ys
+        Returns:
+            [Tuple(List[Points],int)]: [Mid Height Points, mid_height]
+        &#34;&#34;&#34;
+        y_sorted = sorted(set(ys))
+        mid_y = y_sorted[len(y_sorted) // 2]
+        y_indexs = np.argwhere(ys == mid_y)
+        matched_xs = xs[y_indexs]
+        min_x = int(min(matched_xs))
+        max_x = int(max(matched_xs))
+        height_points = [(min_x, mid_y), (max_x, mid_y)]
+        height = max_x - min_x
+        # print(f&#34;Height Points {height_points}&#34;)
+        return height_points, height
+
+    def find_max_width(self, tops, bottoms):
+        &#34;&#34;&#34;Return Max width of patch
+
+        Args:
+            tops (List[Points]): Top boundary of fruit
+            bottoms (List[Points]): Lower boundary of fruit
+
+        Returns:
+            [Tuple(List[Points],int)]: [Max Width Points, Max Width]
+        &#34;&#34;&#34;
+        max_index, max_width = None, -1
+        for i in range(len(tops)):
+            width = bottoms[i][1] - tops[i][1]
+            if width &gt; max_width:
+                max_width = width
+                max_index = i
+        width_points = [tops[max_index], bottoms[max_index]]
+        return width_points, max_width
+
+    @staticmethod
+    def ray_trace_segment(img, init, direction=&#34;y&#34;, to_origin=True):
+        &#34;&#34;&#34;Ray trace from the inital points to some end  like end of non zero pixels in image. Is useful for fruits that turns and make an S shape
+
+        Args:
+            img ([np.array(H,W)]): Gray scale Image of dim HxW
+            init ([int]): Point coordinate x or y to start the ray tracing from
+            direction (str, optional): [description]. Direction to move to the ray trace. Defaults to &#34;y&#34;.
+            to_origin (int, optional): [description]. To go to origin or not(For x direction origin is to left). Defaults to True.
+
+        Returns:
+            [type]: [description]
+        &#34;&#34;&#34;
+        assert len(img.shape) == 2, &#34;Should be Gray scale image&#34;
+        h, w = img.shape
+        if direction == &#34;y&#34;:
+            # Go downwards
+            increment = 1
+            x = init
+            y = 0
+            segments = []
+            # Go along the height of image to find segments
+            while y &lt; h:
+                firstPoint = None
+                secondPoint = None
+                if img[y, x]:  # find first non zero point
+                    firstPoint = (x, y)
+                    while y &lt; h and img[y, x]:
+                        y += increment
+                    # find last non zero point for that x, Replace below 4 with some more dynamic threshold
+                    if y - firstPoint[1] &gt; 4:
+                        secondPoint = (x, y)
+                    if firstPoint and secondPoint:
+                        segments.append([firstPoint, secondPoint, secondPoint[1] - firstPoint[1]])
+                y += increment
+        elif direction == &#34;x&#34;:
+            x, y = init
+            if to_origin:
+                # Go Left
+                increment = -1
+            else:
+                # Go Right
+                increment = 1
+            segments = []
+            x += increment
+            while x &lt; w and x &gt;= 0:
+                if img[y, x]:
+                    segments.append((x, y))
+                x += increment
+        return segments
+
+    def find_curve_height(self, top, bottom, mask, ign_pct=15):
+        &#34;&#34;&#34;Find curved height of patch. Find mid point of patch ignoring the start and end given ignore percentage and then extend to both sides
+        Curved Height &gt;= Mid Height
+        Args:
+            tops (List[Points]): Top boundary of fruit
+            bottoms (List[Points]): Lower boundary of fruit
+            mask ([np.array]): gray scale image for extending the curved height to boundaries
+            ign_pct (int, optional): %age of fruit to ignore from start and end. Defaults to 15.
+
+        Returns:
+            [List[Points]]: List of points constituting the curved height
+        &#34;&#34;&#34;
+        c_length = []
+        # curved length causes issues at the borders so ignoring length at borders
+        ign_pct = ign_pct / 100
+        for i in range(int(len(top) * ign_pct), int(len(top) * (1 - ign_pct))):
+            c_length.append((top[i][0], round((top[i][1] + bottom[i][1]) / 2)))
+        # Ray trace to extend the curve length on left
+        segment_left = VEGPHENOMEBASE.ray_trace_segment(mask, c_length[0], direction=&#34;x&#34;, to_origin=1)
+        c_length = segment_left + c_length
+        # Ray trace to extend the curve length on right
+        segment_right = VEGPHENOMEBASE.ray_trace_segment(mask, c_length[-1], direction=&#34;x&#34;, to_origin=0)
+        c_length = c_length + segment_right
+        return c_length
+
+    def ellipse_fitting_normalized(self, mask):
+        &#34;&#34;&#34;Normalized Ellipse Fitting. Fits ellipse to contour. Draw ellipse to image and find IoU between mask and drawn ellipse.
+        The vaue returned is 1-Iou varies between 0 and 1. 0 means no error and 1 means maximum error
+
+        Args:
+            mask ([np.array]): Gray scale mask image of patch
+        Returns:
+            [int]: 1 - Iou
+        &#34;&#34;&#34;
+        contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+        contours = max(contours, key=cv2.contourArea)
+        cont = contours
+        (x, y), (MA, ma), angle = cv2.fitEllipse(cont)
+        x, y = int(x), int(y)
+        MA, ma = int(MA), int(ma)
+        ellipse_img = np.zeros_like(mask)
+        # draw complete ellipse form angle 0 to 360
+        cv2.ellipse(ellipse_img, (x, y), (MA // 2, ma // 2), angle, 0, 360, 255, -1)
+        inter = np.logical_and(mask, ellipse_img)
+        union = np.logical_or(mask, ellipse_img)
+        eps = 1e-6
+        iou = np.sum(inter) / (np.sum(union) + eps)
+        return (x, y, MA, ma, angle), 1 - iou
+
+    def box_fit_normalized(self, mask):
+        &#34;&#34;&#34;Normalized Box Fitting. Draw box to image and find IoU between mask and drawn box.
+        The vaue returned is 1-Iou varies between 0 and 1. 0 means no error and 1 means maximum error
+
+        Args:
+            mask ([np.array]): Gray scale mask image of patch
+        Returns:
+            [int]: 1-IoU
+        &#34;&#34;&#34;
+        x, y, w, h = cv2.boundingRect(mask)
+        zer_img = np.zeros_like(mask)
+        cv2.rectangle(zer_img, (x, y), (w, h), 255, -1)
+        # cv2.imwrite(&#34;box_test.png&#34;,zer_img)
+        inter = np.logical_and(mask, zer_img)
+        union = np.logical_or(mask, zer_img)
+        eps = 1e-6
+        iou = np.sum(inter) / (np.sum(union) + eps)
+        return (x, y, w, h), 1 - iou
+
+    def get_color(self, patch, points):
+        &#34;&#34;&#34;Get color of patch given a mask image, Returns Mean R,G,B and Mean L,A,B of patch
+
+        Args:
+            patch ([np.array]): Color image patch of size H,W,3
+            points ([np.array]): Points to calcualte the color from
+
+        Returns:
+            [List]: [(MeanR,MeanG,MeanB),(MeanL,MeanA,MeanB)]
+        &#34;&#34;&#34;
+        b = np.mean(patch[[*points, 0]])
+        g = np.mean(patch[[*points, 1]])
+        r = np.mean(patch[[*points, 2]])
+        rgb = sRGBColor(r, g, b, is_upscaled=True)
+        lab = convert_color(rgb, LabColor)
+        return [rgb.get_upscaled_value_tuple(), lab.get_value_tuple()]
+
+    def eucledian_distance(self, points):
+        &#34;&#34;&#34;Calculates eucledian distance for list of points
+
+        Args:
+            points ([List(Tupe)]): List of points to calculate the eucledian distance
+            ppx ([float]): Optional. scaling factor to convert from image to real world distance
+            ppy ([float]): Optional. scaling factor to convert from image to real world distance
+
+        Returns:
+            [float]: Returns float eucledian distance
+        &#34;&#34;&#34;
+        length = 0
+        if self.ppx and self.ppy:
+            for i in range(1, len(points)):
+                length += np.sqrt(
+                    (((points[i][0] - points[i - 1][0]) * self.ppx) ** 2)
+                    + (((points[i][1] - points[i - 1][1]) * self.ppy) ** 2)
+                )
+        else:
+            for i in range(1, len(points)):
+                length += np.sqrt(((points[i][0] - points[i - 1][0]) ** 2) + ((points[i][1] - points[i - 1][1]) ** 2))
+        return length
+
+    def convert_pixels_to_measure(self, items, labels):
+        &#34;&#34;&#34;Convert pixels to real units cmm/mm if ppx and ppy are defined otherwise find lengths of curves. Labels are used to determine how to convert for area,
+           perimeter and points
+
+        Args:
+            items ([List]): List of items for conversion
+            labels ([type]): Labels for items
+
+        Returns:
+            [List]: Returns list of results converted real world distance
+        &#34;&#34;&#34;
+
+        assert len(items) == len(labels), &#34;Items and Labels should be equal&#34;
+        results = []
+        for index, item in enumerate(items):
+            if labels[index] == &#34;area&#34;:
+                result = item * self.ppx * self.ppy
+                results.append(result)
+            elif labels[index] == &#34;perimeter&#34;:
+                result = item * self.ppx
+                results.append(result)
+            else:
+                result = self.eucledian_distance(item)
+                results.append(result)
+
+        return results
+
+    def blockiness(self, top, bottom, ign_pct=20):
+        &#34;&#34;&#34;Find Blockiness (Width of fruits at start mid and end of fruit)
+
+        Args:
+            tops (List[Points]): Top boundary of fruit
+            bottoms (List[Points]): Lower boundary of fruit
+            ign_pct (int, optional): Percentage to ignore top and bottom of fruit. Defaults to 20.
+
+        Returns:
+            [tuple([[Point,Point],[Point,Point],[Point,Point]])]: Returns bottom, mid and top width of fruit
+        &#34;&#34;&#34;
+        ign_pct = ign_pct / 100
+        bottomindex = int(len(top) * ign_pct)
+        midindex = int(len(top) // 2)
+        topindex = int(len(top) * (1 - ign_pct))
+        bottom_block = [top[bottomindex], bottom[bottomindex]]
+        mid_block = [top[midindex], bottom[midindex]]
+        top_block = [top[topindex], bottom[topindex]]
+        return bottom_block, mid_block, top_block</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="veg_phenome_base.VEGPHENOMEBASE"><code class="flex name class">
+<span>class <span class="ident">VEGPHENOMEBASE</span></span>
+<span>(</span><span>ppx=None, ppy=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Base Phenotyping class. Provides basic phenotype measurements. Each Veg can ingherit and modify the methods of this class</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class VEGPHENOMEBASE:
+    &#34;&#34;&#34;
+    Base Phenotyping class. Provides basic phenotype measurements. Each Veg can ingherit and modify the methods of this class
+    &#34;&#34;&#34;
+
+    def __init__(self, ppx=None, ppy=None) -&gt; None:
+        self.ppx = ppx
+        self.ppy = ppy
+
+    def __repr__(self) -&gt; str:
+        return (
+            &#34;Base class of Veg phenotyping. Overload methods for each fruit/veg as necessary. Currently Implements following crop agnostic traits&#34;
+            + f&#34;{dir(self)}&#34;
+        )
+
+    def min_max_segment(self, ref, xs, ys):
+        &#34;&#34;&#34;Calculate min, max of a patch. Take a reference point x and calculate min and max y for it
+
+        Args:
+            ref int: Reference x for which we need to find min and max y
+            xs (Union[list, np.array()]): All sorted xs
+            ys (Union[list, np.array()]): All sorted ys
+
+        Returns:
+            [Tuple(List,int)]: [segment_point_min,segment_point_max,Segment_width]
+        &#34;&#34;&#34;
+        m_p = np.argwhere(xs == ref)
+        y_p = ys[m_p]
+        ymax = np.max(y_p)
+        ymin = np.min(y_p)
+        out = [(ref, ymin), (ref, ymax), ymax - ymin]
+        return out
+
+    def find_max_height(self, xs, ys):
+        &#34;&#34;&#34;Find Max height of fruit. Height is defined across x dimension.
+        Args:
+            xs (Union[list, np.array()]): All sorted xs
+            ys (Union[list, np.array()]): All sorted ys
+
+        Returns:
+             [Tuple(List,int)]: [height_points, max_height]
+        &#34;&#34;&#34;
+        # Loop throgh all ys and find min and max x
+        assert len(xs) == len(ys), &#34;Lengths of xs and ys are not equal&#34;
+        unique_y = sorted(set(ys))
+        height_points = []
+        maxheight = -1
+        height_points = None
+        for y in unique_y:
+            selected_index = np.argwhere(ys == y)
+            selected_xs = xs[selected_index]
+            xmin = np.min(selected_xs)
+            xmax = np.max(selected_xs)
+            height = xmax - xmin
+            if height &gt; maxheight:
+                height_points = [(xmin, y), (xmax, y)]
+                maxheight = height
+        assert maxheight &gt;= 0, &#34;Max Height could not found&#34;
+        return height_points, maxheight
+
+    def find_mid_height_width(self, tops, bottoms):
+        &#34;&#34;&#34;Finds Width of patch at mid height
+
+        Args:
+            tops (List[Points]): Top boundary of fruit
+            bottoms (List[Points]): Lower boundary of fruit
+
+        Returns:
+            [Tuple(List[Points],int)]: [Mid width Points, mid_width]
+        &#34;&#34;&#34;
+        mid_height = len(tops) // 2
+        width_points = [tops[mid_height], bottoms[mid_height]]
+        width = bottoms[mid_height][1] - tops[mid_height][1]
+        return width_points, width
+
+    def find_mid_width_height(self, xs, ys):
+        &#34;&#34;&#34;Find height of patch at mid width
+
+        Args:
+            xs (Union[list, np.array()]): All sorted xs
+            ys (Union[list, np.array()]): All sorted ys
+        Returns:
+            [Tuple(List[Points],int)]: [Mid Height Points, mid_height]
+        &#34;&#34;&#34;
+        y_sorted = sorted(set(ys))
+        mid_y = y_sorted[len(y_sorted) // 2]
+        y_indexs = np.argwhere(ys == mid_y)
+        matched_xs = xs[y_indexs]
+        min_x = int(min(matched_xs))
+        max_x = int(max(matched_xs))
+        height_points = [(min_x, mid_y), (max_x, mid_y)]
+        height = max_x - min_x
+        # print(f&#34;Height Points {height_points}&#34;)
+        return height_points, height
+
+    def find_max_width(self, tops, bottoms):
+        &#34;&#34;&#34;Return Max width of patch
+
+        Args:
+            tops (List[Points]): Top boundary of fruit
+            bottoms (List[Points]): Lower boundary of fruit
+
+        Returns:
+            [Tuple(List[Points],int)]: [Max Width Points, Max Width]
+        &#34;&#34;&#34;
+        max_index, max_width = None, -1
+        for i in range(len(tops)):
+            width = bottoms[i][1] - tops[i][1]
+            if width &gt; max_width:
+                max_width = width
+                max_index = i
+        width_points = [tops[max_index], bottoms[max_index]]
+        return width_points, max_width
+
+    @staticmethod
+    def ray_trace_segment(img, init, direction=&#34;y&#34;, to_origin=True):
+        &#34;&#34;&#34;Ray trace from the inital points to some end  like end of non zero pixels in image. Is useful for fruits that turns and make an S shape
+
+        Args:
+            img ([np.array(H,W)]): Gray scale Image of dim HxW
+            init ([int]): Point coordinate x or y to start the ray tracing from
+            direction (str, optional): [description]. Direction to move to the ray trace. Defaults to &#34;y&#34;.
+            to_origin (int, optional): [description]. To go to origin or not(For x direction origin is to left). Defaults to True.
+
+        Returns:
+            [type]: [description]
+        &#34;&#34;&#34;
+        assert len(img.shape) == 2, &#34;Should be Gray scale image&#34;
+        h, w = img.shape
+        if direction == &#34;y&#34;:
+            # Go downwards
+            increment = 1
+            x = init
+            y = 0
+            segments = []
+            # Go along the height of image to find segments
+            while y &lt; h:
+                firstPoint = None
+                secondPoint = None
+                if img[y, x]:  # find first non zero point
+                    firstPoint = (x, y)
+                    while y &lt; h and img[y, x]:
+                        y += increment
+                    # find last non zero point for that x, Replace below 4 with some more dynamic threshold
+                    if y - firstPoint[1] &gt; 4:
+                        secondPoint = (x, y)
+                    if firstPoint and secondPoint:
+                        segments.append([firstPoint, secondPoint, secondPoint[1] - firstPoint[1]])
+                y += increment
+        elif direction == &#34;x&#34;:
+            x, y = init
+            if to_origin:
+                # Go Left
+                increment = -1
+            else:
+                # Go Right
+                increment = 1
+            segments = []
+            x += increment
+            while x &lt; w and x &gt;= 0:
+                if img[y, x]:
+                    segments.append((x, y))
+                x += increment
+        return segments
+
+    def find_curve_height(self, top, bottom, mask, ign_pct=15):
+        &#34;&#34;&#34;Find curved height of patch. Find mid point of patch ignoring the start and end given ignore percentage and then extend to both sides
+        Curved Height &gt;= Mid Height
+        Args:
+            tops (List[Points]): Top boundary of fruit
+            bottoms (List[Points]): Lower boundary of fruit
+            mask ([np.array]): gray scale image for extending the curved height to boundaries
+            ign_pct (int, optional): %age of fruit to ignore from start and end. Defaults to 15.
+
+        Returns:
+            [List[Points]]: List of points constituting the curved height
+        &#34;&#34;&#34;
+        c_length = []
+        # curved length causes issues at the borders so ignoring length at borders
+        ign_pct = ign_pct / 100
+        for i in range(int(len(top) * ign_pct), int(len(top) * (1 - ign_pct))):
+            c_length.append((top[i][0], round((top[i][1] + bottom[i][1]) / 2)))
+        # Ray trace to extend the curve length on left
+        segment_left = VEGPHENOMEBASE.ray_trace_segment(mask, c_length[0], direction=&#34;x&#34;, to_origin=1)
+        c_length = segment_left + c_length
+        # Ray trace to extend the curve length on right
+        segment_right = VEGPHENOMEBASE.ray_trace_segment(mask, c_length[-1], direction=&#34;x&#34;, to_origin=0)
+        c_length = c_length + segment_right
+        return c_length
+
+    def ellipse_fitting_normalized(self, mask):
+        &#34;&#34;&#34;Normalized Ellipse Fitting. Fits ellipse to contour. Draw ellipse to image and find IoU between mask and drawn ellipse.
+        The vaue returned is 1-Iou varies between 0 and 1. 0 means no error and 1 means maximum error
+
+        Args:
+            mask ([np.array]): Gray scale mask image of patch
+        Returns:
+            [int]: 1 - Iou
+        &#34;&#34;&#34;
+        contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+        contours = max(contours, key=cv2.contourArea)
+        cont = contours
+        (x, y), (MA, ma), angle = cv2.fitEllipse(cont)
+        x, y = int(x), int(y)
+        MA, ma = int(MA), int(ma)
+        ellipse_img = np.zeros_like(mask)
+        # draw complete ellipse form angle 0 to 360
+        cv2.ellipse(ellipse_img, (x, y), (MA // 2, ma // 2), angle, 0, 360, 255, -1)
+        inter = np.logical_and(mask, ellipse_img)
+        union = np.logical_or(mask, ellipse_img)
+        eps = 1e-6
+        iou = np.sum(inter) / (np.sum(union) + eps)
+        return (x, y, MA, ma, angle), 1 - iou
+
+    def box_fit_normalized(self, mask):
+        &#34;&#34;&#34;Normalized Box Fitting. Draw box to image and find IoU between mask and drawn box.
+        The vaue returned is 1-Iou varies between 0 and 1. 0 means no error and 1 means maximum error
+
+        Args:
+            mask ([np.array]): Gray scale mask image of patch
+        Returns:
+            [int]: 1-IoU
+        &#34;&#34;&#34;
+        x, y, w, h = cv2.boundingRect(mask)
+        zer_img = np.zeros_like(mask)
+        cv2.rectangle(zer_img, (x, y), (w, h), 255, -1)
+        # cv2.imwrite(&#34;box_test.png&#34;,zer_img)
+        inter = np.logical_and(mask, zer_img)
+        union = np.logical_or(mask, zer_img)
+        eps = 1e-6
+        iou = np.sum(inter) / (np.sum(union) + eps)
+        return (x, y, w, h), 1 - iou
+
+    def get_color(self, patch, points):
+        &#34;&#34;&#34;Get color of patch given a mask image, Returns Mean R,G,B and Mean L,A,B of patch
+
+        Args:
+            patch ([np.array]): Color image patch of size H,W,3
+            points ([np.array]): Points to calcualte the color from
+
+        Returns:
+            [List]: [(MeanR,MeanG,MeanB),(MeanL,MeanA,MeanB)]
+        &#34;&#34;&#34;
+        b = np.mean(patch[[*points, 0]])
+        g = np.mean(patch[[*points, 1]])
+        r = np.mean(patch[[*points, 2]])
+        rgb = sRGBColor(r, g, b, is_upscaled=True)
+        lab = convert_color(rgb, LabColor)
+        return [rgb.get_upscaled_value_tuple(), lab.get_value_tuple()]
+
+    def eucledian_distance(self, points):
+        &#34;&#34;&#34;Calculates eucledian distance for list of points
+
+        Args:
+            points ([List(Tupe)]): List of points to calculate the eucledian distance
+            ppx ([float]): Optional. scaling factor to convert from image to real world distance
+            ppy ([float]): Optional. scaling factor to convert from image to real world distance
+
+        Returns:
+            [float]: Returns float eucledian distance
+        &#34;&#34;&#34;
+        length = 0
+        if self.ppx and self.ppy:
+            for i in range(1, len(points)):
+                length += np.sqrt(
+                    (((points[i][0] - points[i - 1][0]) * self.ppx) ** 2)
+                    + (((points[i][1] - points[i - 1][1]) * self.ppy) ** 2)
+                )
+        else:
+            for i in range(1, len(points)):
+                length += np.sqrt(((points[i][0] - points[i - 1][0]) ** 2) + ((points[i][1] - points[i - 1][1]) ** 2))
+        return length
+
+    def convert_pixels_to_measure(self, items, labels):
+        &#34;&#34;&#34;Convert pixels to real units cmm/mm if ppx and ppy are defined otherwise find lengths of curves. Labels are used to determine how to convert for area,
+           perimeter and points
+
+        Args:
+            items ([List]): List of items for conversion
+            labels ([type]): Labels for items
+
+        Returns:
+            [List]: Returns list of results converted real world distance
+        &#34;&#34;&#34;
+
+        assert len(items) == len(labels), &#34;Items and Labels should be equal&#34;
+        results = []
+        for index, item in enumerate(items):
+            if labels[index] == &#34;area&#34;:
+                result = item * self.ppx * self.ppy
+                results.append(result)
+            elif labels[index] == &#34;perimeter&#34;:
+                result = item * self.ppx
+                results.append(result)
+            else:
+                result = self.eucledian_distance(item)
+                results.append(result)
+
+        return results
+
+    def blockiness(self, top, bottom, ign_pct=20):
+        &#34;&#34;&#34;Find Blockiness (Width of fruits at start mid and end of fruit)
+
+        Args:
+            tops (List[Points]): Top boundary of fruit
+            bottoms (List[Points]): Lower boundary of fruit
+            ign_pct (int, optional): Percentage to ignore top and bottom of fruit. Defaults to 20.
+
+        Returns:
+            [tuple([[Point,Point],[Point,Point],[Point,Point]])]: Returns bottom, mid and top width of fruit
+        &#34;&#34;&#34;
+        ign_pct = ign_pct / 100
+        bottomindex = int(len(top) * ign_pct)
+        midindex = int(len(top) // 2)
+        topindex = int(len(top) * (1 - ign_pct))
+        bottom_block = [top[bottomindex], bottom[bottomindex]]
+        mid_block = [top[midindex], bottom[midindex]]
+        top_block = [top[topindex], bottom[topindex]]
+        return bottom_block, mid_block, top_block</code></pre>
+</details>
+<h3>Static methods</h3>
+<dl>
+<dt id="veg_phenome_base.VEGPHENOMEBASE.ray_trace_segment"><code class="name flex">
+<span>def <span class="ident">ray_trace_segment</span></span>(<span>img, init, direction='y', to_origin=True)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Ray trace from the inital points to some end
+like end of non zero pixels in image. Is useful for fruits that turns and make an S shape</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt>img ([np.array(H,W)]): Gray scale Image of dim HxW</dt>
+<dt><strong><code>init</code></strong> :&ensp;<code>[int]</code></dt>
+<dd>Point coordinate x or y to start the ray tracing from</dd>
+<dt><strong><code>direction</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>[description]. Direction to move to the ray trace. Defaults to "y".</dd>
+<dt><strong><code>to_origin</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>[description]. To go to origin or not(For x direction origin is to left). Defaults to True.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>[type]</code></dt>
+<dd>[description]</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def ray_trace_segment(img, init, direction=&#34;y&#34;, to_origin=True):
+    &#34;&#34;&#34;Ray trace from the inital points to some end  like end of non zero pixels in image. Is useful for fruits that turns and make an S shape
+
+    Args:
+        img ([np.array(H,W)]): Gray scale Image of dim HxW
+        init ([int]): Point coordinate x or y to start the ray tracing from
+        direction (str, optional): [description]. Direction to move to the ray trace. Defaults to &#34;y&#34;.
+        to_origin (int, optional): [description]. To go to origin or not(For x direction origin is to left). Defaults to True.
+
+    Returns:
+        [type]: [description]
+    &#34;&#34;&#34;
+    assert len(img.shape) == 2, &#34;Should be Gray scale image&#34;
+    h, w = img.shape
+    if direction == &#34;y&#34;:
+        # Go downwards
+        increment = 1
+        x = init
+        y = 0
+        segments = []
+        # Go along the height of image to find segments
+        while y &lt; h:
+            firstPoint = None
+            secondPoint = None
+            if img[y, x]:  # find first non zero point
+                firstPoint = (x, y)
+                while y &lt; h and img[y, x]:
+                    y += increment
+                # find last non zero point for that x, Replace below 4 with some more dynamic threshold
+                if y - firstPoint[1] &gt; 4:
+                    secondPoint = (x, y)
+                if firstPoint and secondPoint:
+                    segments.append([firstPoint, secondPoint, secondPoint[1] - firstPoint[1]])
+            y += increment
+    elif direction == &#34;x&#34;:
+        x, y = init
+        if to_origin:
+            # Go Left
+            increment = -1
+        else:
+            # Go Right
+            increment = 1
+        segments = []
+        x += increment
+        while x &lt; w and x &gt;= 0:
+            if img[y, x]:
+                segments.append((x, y))
+            x += increment
+    return segments</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="veg_phenome_base.VEGPHENOMEBASE.blockiness"><code class="name flex">
+<span>def <span class="ident">blockiness</span></span>(<span>self, top, bottom, ign_pct=20)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Find Blockiness (Width of fruits at start mid and end of fruit)</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>tops</code></strong> :&ensp;<code>List[Points]</code></dt>
+<dd>Top boundary of fruit</dd>
+<dt><strong><code>bottoms</code></strong> :&ensp;<code>List[Points]</code></dt>
+<dd>Lower boundary of fruit</dd>
+<dt><strong><code>ign_pct</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>Percentage to ignore top and bottom of fruit. Defaults to 20.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>[tuple([[Point,Point],[Point,Point],[Point,Point]])]: Returns bottom, mid and top width of fruit</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def blockiness(self, top, bottom, ign_pct=20):
+    &#34;&#34;&#34;Find Blockiness (Width of fruits at start mid and end of fruit)
+
+    Args:
+        tops (List[Points]): Top boundary of fruit
+        bottoms (List[Points]): Lower boundary of fruit
+        ign_pct (int, optional): Percentage to ignore top and bottom of fruit. Defaults to 20.
+
+    Returns:
+        [tuple([[Point,Point],[Point,Point],[Point,Point]])]: Returns bottom, mid and top width of fruit
+    &#34;&#34;&#34;
+    ign_pct = ign_pct / 100
+    bottomindex = int(len(top) * ign_pct)
+    midindex = int(len(top) // 2)
+    topindex = int(len(top) * (1 - ign_pct))
+    bottom_block = [top[bottomindex], bottom[bottomindex]]
+    mid_block = [top[midindex], bottom[midindex]]
+    top_block = [top[topindex], bottom[topindex]]
+    return bottom_block, mid_block, top_block</code></pre>
+</details>
+</dd>
+<dt id="veg_phenome_base.VEGPHENOMEBASE.box_fit_normalized"><code class="name flex">
+<span>def <span class="ident">box_fit_normalized</span></span>(<span>self, mask)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Normalized Box Fitting. Draw box to image and find IoU between mask and drawn box.
+The vaue returned is 1-Iou varies between 0 and 1. 0 means no error and 1 means maximum error</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>mask</code></strong> :&ensp;<code>[np.array]</code></dt>
+<dd>Gray scale mask image of patch</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>[int]</code></dt>
+<dd>1-IoU</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def box_fit_normalized(self, mask):
+    &#34;&#34;&#34;Normalized Box Fitting. Draw box to image and find IoU between mask and drawn box.
+    The vaue returned is 1-Iou varies between 0 and 1. 0 means no error and 1 means maximum error
+
+    Args:
+        mask ([np.array]): Gray scale mask image of patch
+    Returns:
+        [int]: 1-IoU
+    &#34;&#34;&#34;
+    x, y, w, h = cv2.boundingRect(mask)
+    zer_img = np.zeros_like(mask)
+    cv2.rectangle(zer_img, (x, y), (w, h), 255, -1)
+    # cv2.imwrite(&#34;box_test.png&#34;,zer_img)
+    inter = np.logical_and(mask, zer_img)
+    union = np.logical_or(mask, zer_img)
+    eps = 1e-6
+    iou = np.sum(inter) / (np.sum(union) + eps)
+    return (x, y, w, h), 1 - iou</code></pre>
+</details>
+</dd>
+<dt id="veg_phenome_base.VEGPHENOMEBASE.convert_pixels_to_measure"><code class="name flex">
+<span>def <span class="ident">convert_pixels_to_measure</span></span>(<span>self, items, labels)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Convert pixels to real units cmm/mm if ppx and ppy are defined otherwise find lengths of curves. Labels are used to determine how to convert for area,
+perimeter and points</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>items</code></strong> :&ensp;<code>[List]</code></dt>
+<dd>List of items for conversion</dd>
+<dt><strong><code>labels</code></strong> :&ensp;<code>[type]</code></dt>
+<dd>Labels for items</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>[List]</code></dt>
+<dd>Returns list of results converted real world distance</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def convert_pixels_to_measure(self, items, labels):
+    &#34;&#34;&#34;Convert pixels to real units cmm/mm if ppx and ppy are defined otherwise find lengths of curves. Labels are used to determine how to convert for area,
+       perimeter and points
+
+    Args:
+        items ([List]): List of items for conversion
+        labels ([type]): Labels for items
+
+    Returns:
+        [List]: Returns list of results converted real world distance
+    &#34;&#34;&#34;
+
+    assert len(items) == len(labels), &#34;Items and Labels should be equal&#34;
+    results = []
+    for index, item in enumerate(items):
+        if labels[index] == &#34;area&#34;:
+            result = item * self.ppx * self.ppy
+            results.append(result)
+        elif labels[index] == &#34;perimeter&#34;:
+            result = item * self.ppx
+            results.append(result)
+        else:
+            result = self.eucledian_distance(item)
+            results.append(result)
+
+    return results</code></pre>
+</details>
+</dd>
+<dt id="veg_phenome_base.VEGPHENOMEBASE.ellipse_fitting_normalized"><code class="name flex">
+<span>def <span class="ident">ellipse_fitting_normalized</span></span>(<span>self, mask)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Normalized Ellipse Fitting. Fits ellipse to contour. Draw ellipse to image and find IoU between mask and drawn ellipse.
+The vaue returned is 1-Iou varies between 0 and 1. 0 means no error and 1 means maximum error</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>mask</code></strong> :&ensp;<code>[np.array]</code></dt>
+<dd>Gray scale mask image of patch</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>[int]</code></dt>
+<dd>1 - Iou</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def ellipse_fitting_normalized(self, mask):
+    &#34;&#34;&#34;Normalized Ellipse Fitting. Fits ellipse to contour. Draw ellipse to image and find IoU between mask and drawn ellipse.
+    The vaue returned is 1-Iou varies between 0 and 1. 0 means no error and 1 means maximum error
+
+    Args:
+        mask ([np.array]): Gray scale mask image of patch
+    Returns:
+        [int]: 1 - Iou
+    &#34;&#34;&#34;
+    contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+    contours = max(contours, key=cv2.contourArea)
+    cont = contours
+    (x, y), (MA, ma), angle = cv2.fitEllipse(cont)
+    x, y = int(x), int(y)
+    MA, ma = int(MA), int(ma)
+    ellipse_img = np.zeros_like(mask)
+    # draw complete ellipse form angle 0 to 360
+    cv2.ellipse(ellipse_img, (x, y), (MA // 2, ma // 2), angle, 0, 360, 255, -1)
+    inter = np.logical_and(mask, ellipse_img)
+    union = np.logical_or(mask, ellipse_img)
+    eps = 1e-6
+    iou = np.sum(inter) / (np.sum(union) + eps)
+    return (x, y, MA, ma, angle), 1 - iou</code></pre>
+</details>
+</dd>
+<dt id="veg_phenome_base.VEGPHENOMEBASE.eucledian_distance"><code class="name flex">
+<span>def <span class="ident">eucledian_distance</span></span>(<span>self, points)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Calculates eucledian distance for list of points</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt>points ([List(Tupe)]): List of points to calculate the eucledian distance</dt>
+<dt><strong><code>ppx</code></strong> :&ensp;<code>[float]</code></dt>
+<dd>Optional. scaling factor to convert from image to real world distance</dd>
+<dt><strong><code>ppy</code></strong> :&ensp;<code>[float]</code></dt>
+<dd>Optional. scaling factor to convert from image to real world distance</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>[float]</code></dt>
+<dd>Returns float eucledian distance</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def eucledian_distance(self, points):
+    &#34;&#34;&#34;Calculates eucledian distance for list of points
+
+    Args:
+        points ([List(Tupe)]): List of points to calculate the eucledian distance
+        ppx ([float]): Optional. scaling factor to convert from image to real world distance
+        ppy ([float]): Optional. scaling factor to convert from image to real world distance
+
+    Returns:
+        [float]: Returns float eucledian distance
+    &#34;&#34;&#34;
+    length = 0
+    if self.ppx and self.ppy:
+        for i in range(1, len(points)):
+            length += np.sqrt(
+                (((points[i][0] - points[i - 1][0]) * self.ppx) ** 2)
+                + (((points[i][1] - points[i - 1][1]) * self.ppy) ** 2)
+            )
+    else:
+        for i in range(1, len(points)):
+            length += np.sqrt(((points[i][0] - points[i - 1][0]) ** 2) + ((points[i][1] - points[i - 1][1]) ** 2))
+    return length</code></pre>
+</details>
+</dd>
+<dt id="veg_phenome_base.VEGPHENOMEBASE.find_curve_height"><code class="name flex">
+<span>def <span class="ident">find_curve_height</span></span>(<span>self, top, bottom, mask, ign_pct=15)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Find curved height of patch. Find mid point of patch ignoring the start and end given ignore percentage and then extend to both sides
+Curved Height &gt;= Mid Height</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>tops</code></strong> :&ensp;<code>List[Points]</code></dt>
+<dd>Top boundary of fruit</dd>
+<dt><strong><code>bottoms</code></strong> :&ensp;<code>List[Points]</code></dt>
+<dd>Lower boundary of fruit</dd>
+<dt><strong><code>mask</code></strong> :&ensp;<code>[np.array]</code></dt>
+<dd>gray scale image for extending the curved height to boundaries</dd>
+<dt><strong><code>ign_pct</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>%age of fruit to ignore from start and end. Defaults to 15.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>[List[Points]]</code></dt>
+<dd>List of points constituting the curved height</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def find_curve_height(self, top, bottom, mask, ign_pct=15):
+    &#34;&#34;&#34;Find curved height of patch. Find mid point of patch ignoring the start and end given ignore percentage and then extend to both sides
+    Curved Height &gt;= Mid Height
+    Args:
+        tops (List[Points]): Top boundary of fruit
+        bottoms (List[Points]): Lower boundary of fruit
+        mask ([np.array]): gray scale image for extending the curved height to boundaries
+        ign_pct (int, optional): %age of fruit to ignore from start and end. Defaults to 15.
+
+    Returns:
+        [List[Points]]: List of points constituting the curved height
+    &#34;&#34;&#34;
+    c_length = []
+    # curved length causes issues at the borders so ignoring length at borders
+    ign_pct = ign_pct / 100
+    for i in range(int(len(top) * ign_pct), int(len(top) * (1 - ign_pct))):
+        c_length.append((top[i][0], round((top[i][1] + bottom[i][1]) / 2)))
+    # Ray trace to extend the curve length on left
+    segment_left = VEGPHENOMEBASE.ray_trace_segment(mask, c_length[0], direction=&#34;x&#34;, to_origin=1)
+    c_length = segment_left + c_length
+    # Ray trace to extend the curve length on right
+    segment_right = VEGPHENOMEBASE.ray_trace_segment(mask, c_length[-1], direction=&#34;x&#34;, to_origin=0)
+    c_length = c_length + segment_right
+    return c_length</code></pre>
+</details>
+</dd>
+<dt id="veg_phenome_base.VEGPHENOMEBASE.find_max_height"><code class="name flex">
+<span>def <span class="ident">find_max_height</span></span>(<span>self, xs, ys)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Find Max height of fruit. Height is defined across x dimension.</p>
+<h2 id="args">Args</h2>
+<p>xs (Union[list, np.array()]): All sorted xs
+ys (Union[list, np.array()]): All sorted ys</p>
+<h2 id="returns">Returns</h2>
+<p>[Tuple(List,int)]: [height_points, max_height]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def find_max_height(self, xs, ys):
+    &#34;&#34;&#34;Find Max height of fruit. Height is defined across x dimension.
+    Args:
+        xs (Union[list, np.array()]): All sorted xs
+        ys (Union[list, np.array()]): All sorted ys
+
+    Returns:
+         [Tuple(List,int)]: [height_points, max_height]
+    &#34;&#34;&#34;
+    # Loop throgh all ys and find min and max x
+    assert len(xs) == len(ys), &#34;Lengths of xs and ys are not equal&#34;
+    unique_y = sorted(set(ys))
+    height_points = []
+    maxheight = -1
+    height_points = None
+    for y in unique_y:
+        selected_index = np.argwhere(ys == y)
+        selected_xs = xs[selected_index]
+        xmin = np.min(selected_xs)
+        xmax = np.max(selected_xs)
+        height = xmax - xmin
+        if height &gt; maxheight:
+            height_points = [(xmin, y), (xmax, y)]
+            maxheight = height
+    assert maxheight &gt;= 0, &#34;Max Height could not found&#34;
+    return height_points, maxheight</code></pre>
+</details>
+</dd>
+<dt id="veg_phenome_base.VEGPHENOMEBASE.find_max_width"><code class="name flex">
+<span>def <span class="ident">find_max_width</span></span>(<span>self, tops, bottoms)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return Max width of patch</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>tops</code></strong> :&ensp;<code>List[Points]</code></dt>
+<dd>Top boundary of fruit</dd>
+<dt><strong><code>bottoms</code></strong> :&ensp;<code>List[Points]</code></dt>
+<dd>Lower boundary of fruit</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>[Tuple(List[Points],int)]: [Max Width Points, Max Width]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def find_max_width(self, tops, bottoms):
+    &#34;&#34;&#34;Return Max width of patch
+
+    Args:
+        tops (List[Points]): Top boundary of fruit
+        bottoms (List[Points]): Lower boundary of fruit
+
+    Returns:
+        [Tuple(List[Points],int)]: [Max Width Points, Max Width]
+    &#34;&#34;&#34;
+    max_index, max_width = None, -1
+    for i in range(len(tops)):
+        width = bottoms[i][1] - tops[i][1]
+        if width &gt; max_width:
+            max_width = width
+            max_index = i
+    width_points = [tops[max_index], bottoms[max_index]]
+    return width_points, max_width</code></pre>
+</details>
+</dd>
+<dt id="veg_phenome_base.VEGPHENOMEBASE.find_mid_height_width"><code class="name flex">
+<span>def <span class="ident">find_mid_height_width</span></span>(<span>self, tops, bottoms)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Finds Width of patch at mid height</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>tops</code></strong> :&ensp;<code>List[Points]</code></dt>
+<dd>Top boundary of fruit</dd>
+<dt><strong><code>bottoms</code></strong> :&ensp;<code>List[Points]</code></dt>
+<dd>Lower boundary of fruit</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>[Tuple(List[Points],int)]: [Mid width Points, mid_width]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def find_mid_height_width(self, tops, bottoms):
+    &#34;&#34;&#34;Finds Width of patch at mid height
+
+    Args:
+        tops (List[Points]): Top boundary of fruit
+        bottoms (List[Points]): Lower boundary of fruit
+
+    Returns:
+        [Tuple(List[Points],int)]: [Mid width Points, mid_width]
+    &#34;&#34;&#34;
+    mid_height = len(tops) // 2
+    width_points = [tops[mid_height], bottoms[mid_height]]
+    width = bottoms[mid_height][1] - tops[mid_height][1]
+    return width_points, width</code></pre>
+</details>
+</dd>
+<dt id="veg_phenome_base.VEGPHENOMEBASE.find_mid_width_height"><code class="name flex">
+<span>def <span class="ident">find_mid_width_height</span></span>(<span>self, xs, ys)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Find height of patch at mid width</p>
+<h2 id="args">Args</h2>
+<p>xs (Union[list, np.array()]): All sorted xs
+ys (Union[list, np.array()]): All sorted ys</p>
+<h2 id="returns">Returns</h2>
+<p>[Tuple(List[Points],int)]: [Mid Height Points, mid_height]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def find_mid_width_height(self, xs, ys):
+    &#34;&#34;&#34;Find height of patch at mid width
+
+    Args:
+        xs (Union[list, np.array()]): All sorted xs
+        ys (Union[list, np.array()]): All sorted ys
+    Returns:
+        [Tuple(List[Points],int)]: [Mid Height Points, mid_height]
+    &#34;&#34;&#34;
+    y_sorted = sorted(set(ys))
+    mid_y = y_sorted[len(y_sorted) // 2]
+    y_indexs = np.argwhere(ys == mid_y)
+    matched_xs = xs[y_indexs]
+    min_x = int(min(matched_xs))
+    max_x = int(max(matched_xs))
+    height_points = [(min_x, mid_y), (max_x, mid_y)]
+    height = max_x - min_x
+    # print(f&#34;Height Points {height_points}&#34;)
+    return height_points, height</code></pre>
+</details>
+</dd>
+<dt id="veg_phenome_base.VEGPHENOMEBASE.get_color"><code class="name flex">
+<span>def <span class="ident">get_color</span></span>(<span>self, patch, points)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get color of patch given a mask image, Returns Mean R,G,B and Mean L,A,B of patch</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>patch</code></strong> :&ensp;<code>[np.array]</code></dt>
+<dd>Color image patch of size H,W,3</dd>
+<dt><strong><code>points</code></strong> :&ensp;<code>[np.array]</code></dt>
+<dd>Points to calcualte the color from</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>[List]</code></dt>
+<dd>[(MeanR,MeanG,MeanB),(MeanL,MeanA,MeanB)]</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_color(self, patch, points):
+    &#34;&#34;&#34;Get color of patch given a mask image, Returns Mean R,G,B and Mean L,A,B of patch
+
+    Args:
+        patch ([np.array]): Color image patch of size H,W,3
+        points ([np.array]): Points to calcualte the color from
+
+    Returns:
+        [List]: [(MeanR,MeanG,MeanB),(MeanL,MeanA,MeanB)]
+    &#34;&#34;&#34;
+    b = np.mean(patch[[*points, 0]])
+    g = np.mean(patch[[*points, 1]])
+    r = np.mean(patch[[*points, 2]])
+    rgb = sRGBColor(r, g, b, is_upscaled=True)
+    lab = convert_color(rgb, LabColor)
+    return [rgb.get_upscaled_value_tuple(), lab.get_value_tuple()]</code></pre>
+</details>
+</dd>
+<dt id="veg_phenome_base.VEGPHENOMEBASE.min_max_segment"><code class="name flex">
+<span>def <span class="ident">min_max_segment</span></span>(<span>self, ref, xs, ys)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Calculate min, max of a patch. Take a reference point x and calculate min and max y for it</p>
+<h2 id="args">Args</h2>
+<p>ref int: Reference x for which we need to find min and max y
+xs (Union[list, np.array()]): All sorted xs
+ys (Union[list, np.array()]): All sorted ys</p>
+<h2 id="returns">Returns</h2></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def min_max_segment(self, ref, xs, ys):
+    &#34;&#34;&#34;Calculate min, max of a patch. Take a reference point x and calculate min and max y for it
+
+    Args:
+        ref int: Reference x for which we need to find min and max y
+        xs (Union[list, np.array()]): All sorted xs
+        ys (Union[list, np.array()]): All sorted ys
+
+    Returns:
+        [Tuple(List,int)]: [segment_point_min,segment_point_max,Segment_width]
+    &#34;&#34;&#34;
+    m_p = np.argwhere(xs == ref)
+    y_p = ys[m_p]
+    ymax = np.max(y_p)
+    ymin = np.min(y_p)
+    out = [(ref, ymin), (ref, ymax), ymax - ymin]
+    return out</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="veg_phenome_base.VEGPHENOMEBASE" href="#veg_phenome_base.VEGPHENOMEBASE">VEGPHENOMEBASE</a></code></h4>
+<ul class="">
+<li><code><a title="veg_phenome_base.VEGPHENOMEBASE.blockiness" href="#veg_phenome_base.VEGPHENOMEBASE.blockiness">blockiness</a></code></li>
+<li><code><a title="veg_phenome_base.VEGPHENOMEBASE.box_fit_normalized" href="#veg_phenome_base.VEGPHENOMEBASE.box_fit_normalized">box_fit_normalized</a></code></li>
+<li><code><a title="veg_phenome_base.VEGPHENOMEBASE.convert_pixels_to_measure" href="#veg_phenome_base.VEGPHENOMEBASE.convert_pixels_to_measure">convert_pixels_to_measure</a></code></li>
+<li><code><a title="veg_phenome_base.VEGPHENOMEBASE.ellipse_fitting_normalized" href="#veg_phenome_base.VEGPHENOMEBASE.ellipse_fitting_normalized">ellipse_fitting_normalized</a></code></li>
+<li><code><a title="veg_phenome_base.VEGPHENOMEBASE.eucledian_distance" href="#veg_phenome_base.VEGPHENOMEBASE.eucledian_distance">eucledian_distance</a></code></li>
+<li><code><a title="veg_phenome_base.VEGPHENOMEBASE.find_curve_height" href="#veg_phenome_base.VEGPHENOMEBASE.find_curve_height">find_curve_height</a></code></li>
+<li><code><a title="veg_phenome_base.VEGPHENOMEBASE.find_max_height" href="#veg_phenome_base.VEGPHENOMEBASE.find_max_height">find_max_height</a></code></li>
+<li><code><a title="veg_phenome_base.VEGPHENOMEBASE.find_max_width" href="#veg_phenome_base.VEGPHENOMEBASE.find_max_width">find_max_width</a></code></li>
+<li><code><a title="veg_phenome_base.VEGPHENOMEBASE.find_mid_height_width" href="#veg_phenome_base.VEGPHENOMEBASE.find_mid_height_width">find_mid_height_width</a></code></li>
+<li><code><a title="veg_phenome_base.VEGPHENOMEBASE.find_mid_width_height" href="#veg_phenome_base.VEGPHENOMEBASE.find_mid_width_height">find_mid_width_height</a></code></li>
+<li><code><a title="veg_phenome_base.VEGPHENOMEBASE.get_color" href="#veg_phenome_base.VEGPHENOMEBASE.get_color">get_color</a></code></li>
+<li><code><a title="veg_phenome_base.VEGPHENOMEBASE.min_max_segment" href="#veg_phenome_base.VEGPHENOMEBASE.min_max_segment">min_max_segment</a></code></li>
+<li><code><a title="veg_phenome_base.VEGPHENOMEBASE.ray_trace_segment" href="#veg_phenome_base.VEGPHENOMEBASE.ray_trace_segment">ray_trace_segment</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
